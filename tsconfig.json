@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "strict": true,
+    "types": ["@types/jest", "@types/node"]
+  },
+  "include": ["src", "__test__"]
+}

@@ -1,0 +1,75 @@
+{
+  "name": "rollup-simple-configer",
+  "version": "0.0.0",
+  "description": "Set up typescript rollup configuration quickly and easily.",
+  "keywords": [
+    "rollup",
+    "simple",
+    "configer",
+    "build",
+    "common"
+  ],
+  "main": "dist/index.js",
+  "types": "dist/types/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "jest",
+    "build": "tsc --noEmit && eslint --ext .ts,.js ./src && tsc -p tsconfig.build.json",
+    "release": "np",
+    "version": "npm run build"
+  },
+  "lint-staged": {
+    "*.{ts,js}": [
+      "prettier --write",
+      "eslint --fix",
+      "jest --bail --findRelatedTests"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Youmenomi/rollup-simple-configer.git"
+  },
+  "author": "Dean Yao <youmenomi@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Youmenomi/rollup-simple-configer/issues"
+  },
+  "homepage": "https://github.com/Youmenomi/rollup-simple-configer#readme",
+  "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/plugin-proposal-decorators": "^7.10.5",
+    "@babel/preset-env": "^7.11.0",
+    "@babel/preset-typescript": "^7.10.4",
+    "@types/jest": "^26.0.10",
+    "@typescript-eslint/eslint-plugin": "^3.10.1",
+    "@typescript-eslint/parser": "^3.10.1",
+    "babel-eslint": "^10.1.0",
+    "babel-jest": "^26.3.0",
+    "eslint": "^7.7.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "husky": "^4.2.5",
+    "jest": "^26.4.2",
+    "lint-staged": "^10.2.13",
+    "np": "^6.4.0",
+    "prettier": "^2.1.1",
+    "ts-jest": "^26.3.0",
+    "typescript": "^4.0.2"
+  },
+  "dependencies": {
+    "@rollup/plugin-babel": "^5.2.0",
+    "@rollup/plugin-commonjs": "^15.0.0",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^9.0.0",
+    "rollup": "^2.26.6",
+    "rollup-plugin-filesize": "^9.0.2",
+    "rollup-plugin-terser": "^7.0.0"
+  }
+}
