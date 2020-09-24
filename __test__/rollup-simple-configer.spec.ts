@@ -36,7 +36,7 @@ describe('rollup-simple-configer', () => {
         format: 'umd',
         name: 'awesome',
       },
-      { withMin: true }
+      { withMin: true, resolveOnly: ['pichu', 'custom-defaults'] }
     );
     expect(test.result).toBe(test.expect);
   });

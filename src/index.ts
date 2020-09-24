@@ -5,10 +5,12 @@ import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
 import { terser } from 'rollup-plugin-terser';
 import babel from '@rollup/plugin-babel';
+import { defaults } from 'custom-defaults';
 
 export type OtherOptions = {
   external?: ExternalOption;
   withMin?: boolean;
+  resolveOnly?: ReadonlyArray<string | RegExp>;
 };
 
 export type BuildOptions = {
@@ -16,6 +18,11 @@ export type BuildOptions = {
   external?: ExternalOption;
   plugins: Plugin[];
   output: OutputOptions[];
+};
+
+const defOtherOptions = {
+  withMin: false,
+  resolveOnly: [],
 };
 
 const extensions = ['.js', '.jsx', '.ts', '.tsx'];
@@ -33,15 +40,18 @@ export function build(
 export function build(
   input: string,
   outputOrOutputs: OutputOptions | OutputOptions[],
-  otherOptions: OtherOptions = { withMin: false }
+  otherOptions: OtherOptions = defOtherOptions
 ) {
-  const { external, withMin } = otherOptions;
+  const { external, withMin, resolveOnly } = defaults(
+    otherOptions,
+    defOtherOptions
+  );
   const config: BuildOptions = {
     input,
     external,
     plugins: [
       json(),
-      resolve({ extensions }),
+      resolve({ extensions, resolveOnly }),
       commonjs(),
       babel({ extensions, include: ['src/**/*'], babelHelpers: 'bundled' }),
     ],
