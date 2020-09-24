@@ -1,6 +1,6 @@
 {
   "name": "rollup-simple-configer",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "Set up typescript rollup configuration quickly and easily.",
   "keywords": [
     "rollup",
