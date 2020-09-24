@@ -30,12 +30,12 @@ const extensions = ['.js', '.jsx', '.ts', '.tsx'];
 export function build(
   input: string,
   output: OutputOptions | OutputOptions[],
-  otherOptions?: { external?: ExternalOption; withMin: true }
+  otherOptions?: OtherOptions & { withMin: true }
 ): BuildOptions[];
 export function build(
   input: string,
   output: OutputOptions | OutputOptions[],
-  otherOptions?: { external?: ExternalOption; withMin?: boolean }
+  otherOptions?: OtherOptions
 ): BuildOptions;
 export function build(
   input: string,
