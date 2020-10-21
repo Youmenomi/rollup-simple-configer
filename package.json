@@ -16,7 +16,8 @@
   ],
   "scripts": {
     "test": "jest",
-    "build": "tsc --noEmit && eslint --ext .ts,.js ./src && tsc -p tsconfig.build.json",
+    "build:clean": "del dist",
+    "build": "tsc --noEmit && eslint --ext .ts,.js ./src && npm run build:clean && tsc -p tsconfig.build.json",
     "release": "np",
     "version": "npm run build"
   },
@@ -52,6 +53,7 @@
     "@typescript-eslint/parser": "^4.2.0",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^26.3.0",
+    "del-cli": "^3.0.1",
     "eslint": "^7.9.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",

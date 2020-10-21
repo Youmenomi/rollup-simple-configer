@@ -20,11 +20,6 @@ export type BuildOptions = {
   output: OutputOptions[];
 };
 
-const defOtherOptions = {
-  withMin: false,
-  resolveOnly: [],
-};
-
 const extensions = ['.js', '.jsx', '.ts', '.tsx'];
 
 export function build(
@@ -40,12 +35,13 @@ export function build(
 export function build(
   input: string,
   outputOrOutputs: OutputOptions | OutputOptions[],
-  otherOptions: OtherOptions = defOtherOptions
+  otherOptions?: OtherOptions
 ) {
-  const { external, withMin, resolveOnly } = defaults(
-    otherOptions,
-    defOtherOptions
-  );
+  const { external, withMin, resolveOnly } = defaults(otherOptions, {
+    withMin: false,
+    resolveOnly: [],
+    external: undefined,
+  });
   const config: BuildOptions = {
     input,
     external,
