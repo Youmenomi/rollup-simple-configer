@@ -1,28 +1,27 @@
 import { build, OtherOptions, BuildOptions } from '../src';
-import { OutputOptions } from 'rollup';
+import { ExternalOption, OutputOptions } from 'rollup';
 import filesize from 'rollup-plugin-filesize';
 import json from '@rollup/plugin-json';
 import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
 import { terser } from 'rollup-plugin-terser';
 import babel from '@rollup/plugin-babel';
-import { defaults } from 'custom-defaults';
-
-const defOtherOptions = {
-  external: undefined,
-  withMin: false,
-  resolveOnly: [],
-};
 
 export function createTest(
   input: string,
   output: OutputOptions | OutputOptions[],
   otherOptions?: OtherOptions
 ) {
-  const { external, withMin, resolveOnly } = defaults(
-    otherOptions,
-    defOtherOptions
-  );
+  let external: ExternalOption | undefined = undefined;
+  let withMin = false;
+  let resolveOnly: readonly (string | RegExp)[] = [];
+  if (otherOptions) {
+    if (otherOptions.external !== undefined) external = otherOptions.external;
+    if (otherOptions.withMin !== undefined) withMin = otherOptions.withMin;
+    if (otherOptions.resolveOnly !== undefined)
+      resolveOnly = otherOptions.resolveOnly;
+  }
+
   let expect: BuildOptions | BuildOptions[];
   if (withMin) {
     expect = [

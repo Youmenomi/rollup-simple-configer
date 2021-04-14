@@ -5,7 +5,6 @@ import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
 import { terser } from 'rollup-plugin-terser';
 import babel from '@rollup/plugin-babel';
-import { defaults } from 'custom-defaults';
 
 export type OtherOptions = {
   external?: ExternalOption;
@@ -37,11 +36,16 @@ export function build(
   outputOrOutputs: OutputOptions | OutputOptions[],
   otherOptions?: OtherOptions
 ) {
-  const { external, withMin, resolveOnly } = defaults(otherOptions, {
-    withMin: false,
-    resolveOnly: [],
-    external: undefined,
-  });
+  let external: ExternalOption | undefined = undefined;
+  let withMin = false;
+  let resolveOnly: readonly (string | RegExp)[] = [];
+  if (otherOptions) {
+    if (otherOptions.external !== undefined) external = otherOptions.external;
+    if (otherOptions.withMin !== undefined) withMin = otherOptions.withMin;
+    if (otherOptions.resolveOnly !== undefined)
+      resolveOnly = otherOptions.resolveOnly;
+  }
+
   const config: BuildOptions = {
     input,
     external,

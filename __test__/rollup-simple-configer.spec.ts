@@ -45,4 +45,13 @@ describe('rollup-simple-configer', () => {
     const test = createTest('src/cli.ts', {}, { withMin: true });
     expect(test.result).toBe(test.expect);
   });
+
+  it('build output = {}, otherOptions = {}', () => {
+    const test = createTest(
+      'src/cli.ts',
+      { file: 'dist/umd/index.js', format: 'umd', name: 'awesome' },
+      {}
+    );
+    expect(test.result).toBe(test.expect);
+  });
 });
